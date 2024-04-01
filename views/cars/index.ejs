@@ -59,8 +59,8 @@
                             </li>
                         </ul>
                         <div class="d-flex ">
-                            <form class="d-flex" role="search">
-                                <input class="form-control" name="name" type="search" placeholder="Search"
+                            <form class="d-flex" action="/cars" method="GET">
+                                <input class="form-control" type="text" name="searchName" placeholder="Search"
                                     aria-label="Search">
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
@@ -125,11 +125,10 @@
                         </div>
 
                         <div class="d-flex button__group">
-                            <form role="search"></form>
-                            <a href="#" class="btn button__secondary me-3">All</a>
-                            <a href="#" class="btn button__secondary me-3">Small</a>
-                            <a href="#" class="btn button__secondary me-3">Medium</a>
-                            <a href="#" class="btn button__secondary me-3">Large</a>
+                            <a href="/cars" class="btn button__secondary me-3">All</a>
+                            <a href="/cars?category=small" class="btn button__secondary me-3">Small</a>
+                            <a href="/cars?category=medium" class="btn button__secondary me-3">Medium</a>
+                            <a href="/cars?category=large" class="btn button__secondary me-3">Large</a>
                         </div>
 
                         <div class="row mt-4">
@@ -195,20 +194,7 @@
     </div>
 </section>
 
-<!-- <script>
-    const modals = document.querySelectorAll(' .btn__modal') const trigger=document.querySelector('.btn__delete')
-                                modals.forEach((modal)=> {
-                                modal.addEventListener('click', e => {
-                                const id = modal.getAttribute('data-id')
-                                trigger.href = `/delete/${id}`
-                                })
-                                })
 
-                                setTimeout(() => {
-                                var alertMessage = document.getElementById('alert-message')
-                                alertMessage.style.display = 'none';
-                                }, 5000)
-                                </script> -->
                                 <!-- Bootstrap -->
                                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js "
                                     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3 "

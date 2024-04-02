@@ -79,8 +79,8 @@ const createCar = async (req, res) => {
             } else {
                 // Simpan data mobil ke dalam basis data
                 const { name, price, category } = req.body;
-                const imageUrl = req.file ? '/images/' + req.file.filename : ''; // Path gambar jika ada
-                await Car.create({ name, price, category, imageUrl });
+                const image = req.file ? req.file.filename : ''; // Path gambar jika ada
+                await Car.create({ name, price, category, image }); // Menggunakan field image yang baru
                 req.flash("message", "Ditambah");
                 res.redirect("/cars");
             }
@@ -107,13 +107,27 @@ const editCarPage = async (req, res) => {
 
 const editCar = async (req, res) => {
     try {
-        await Car.update(req.body, {
-            where: {
-                id: req.params.id,
-            },
+        // Upload gambar dengan Multer
+        upload(req, res, async function (err) {
+            if (err instanceof multer.MulterError) {
+                // Aksi jika terjadi kesalahan saat upload
+                console.log(err.message);
+            } else if (err) {
+                // Aksi jika terjadi kesalahan lain saat upload
+                console.log(err.message);
+            } else {
+                // Simpan data mobil ke dalam basis data
+                const { name, price, category } = req.body;
+                const image = req.file ? req.file.filename : ''; // Path gambar jika ada
+                await Car.update({ name, price, category, image }, {
+                    where: {
+                        id: req.params.id,
+                    },
+                });
+                req.flash("message", "Diedit");
+                res.redirect("/cars");
+            }
         });
-        req.flash("message", "Diedit");
-        res.redirect("/cars");
     } catch (err) {
         res.render("error.ejs", {
             message: err.message,
